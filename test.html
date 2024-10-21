@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8"/>
-<body style="margin:0;background-color: black;">
+<body>
 
 <link href="./video-js.css" rel="stylesheet"/>
 <script src="./video.js"></script> 
-
-
 
 
 <video id="player" 
@@ -14,8 +12,9 @@ class="video-js"
 controls autoplay preload="none"
 width="960" 
 height="420" 
+style="width: 100%;"
 data-setup="{}">
-<source type="application/x-mpegURL" src="https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8">
+<source type="application/x-mpegURL" src="https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8"/>
 </video>
 </body>
 </html>
