@@ -74,7 +74,7 @@
     <div id="videoContainer">
         <video id="player" 
                class="video-js" 
-               controls autoplay muted preload="auto"
+               autoplay muted preload="auto"
                poster="./play.png"
                data-setup="{}">
             <source id="videoSource" type="application/x-mpegURL" src="">
@@ -101,6 +101,7 @@
     <script>
         let channels = [];
         let isMuted = true;
+        let controlTimer;
 
         // Load the M3U file from the server
         fetch('./file.m3u') // Replace with your server path (only web server)
@@ -232,16 +233,29 @@
             }
         });
 
-        // Add alert on video pause or play
+        // Control visibility of video controls
         const videoPlayer = videojs('player');
-        videoPlayer.ready(function() {
-            this.on('pause', function() {
-                 // alert('Paused.');
-            });
-            this.on('play', function() {
-                // alert('Play.');
-            });
+
+        videoPlayer.on('mousemove', () => {
+            videoPlayer.controls(true); // Show controls
+            resetControlTimer();
         });
+
+        function resetControlTimer() {
+            clearTimeout(controlTimer);
+            controlTimer = setTimeout(() => {
+                videoPlayer.controls(false); // Hide controls after 3 seconds
+            }, 3000); // Time in milliseconds
+        }
+
+        // Show controls on video start
+        videoPlayer.ready(() => {
+            videoPlayer.controls(true);
+            resetControlTimer();
+        });
+
+        videoPlayer.on('play', resetControlTimer);
+        videoPlayer.on('pause', resetControlTimer);
     </script>
     
 </body>
