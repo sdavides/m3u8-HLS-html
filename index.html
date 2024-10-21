@@ -46,17 +46,20 @@
             padding: 5px 10px;
             cursor: pointer;
         }
-        #urlInput {
+        #urlInput, #remoteUrlInput {
             margin: 5px;
             padding: 5px;
             width: 500px;
             color: black;
         }
-		#fileInput { 
-			margin: 5px;
+        #fileInput { 
+            margin: 5px;
             padding: 5px;
             width: 500px;
             color: white;
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
@@ -79,14 +82,20 @@
     </div>
     
     <button id="muteButton">Turn on Audio</button>
-
-    <div>
-        <input type="text" id="urlInput" placeholder="Enter M3U URL" />
-        <button id="loadUrlButton">Load URL</button>
-	</div>
+	
 	<div>
         <input type="file" id="fileInput" />
         <button id="loadFileButton">Load File</button>
+    </div>
+
+    <div>
+        <input type="text" id="urlInput" placeholder="Enter M3U URL" />
+        <button id="loadUrlButton">Load URL video</button>
+    </div>
+
+    <div>
+        <input type="text" id="remoteUrlInput" placeholder="Enter remote M3U URL" />
+        <button id="loadRemoteUrlButton">Load Remote URL list</button>
     </div>
 
     <script>
@@ -208,6 +217,30 @@
                 };
                 reader.readAsText(file);
             }
+        });
+
+        // Load M3U from remote URL
+        document.getElementById('loadRemoteUrlButton').addEventListener('click', function() {
+            const url = document.getElementById('remoteUrlInput').value;
+            if (url) {
+                fetch(url)
+                    .then(response => response.text())
+                    .then(data => {
+                        parseM3U(data);
+                    })
+                    .catch(error => console.error('Error loading remote M3U URL:', error));
+            }
+        });
+
+        // Add alert on video pause or play
+        const videoPlayer = videojs('player');
+        videoPlayer.ready(function() {
+            this.on('pause', function() {
+                alert('Paused.');
+            });
+            this.on('play', function() {
+                // alert('Il video è stato messo in play.');
+            });
         });
     </script>
     
