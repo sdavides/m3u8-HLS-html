@@ -89,13 +89,13 @@
     </div>
 
     <div>
-        <input type="text" id="urlInput" placeholder="Enter M3U URL" />
+        <input type="text" id="urlInput" placeholder="Enter M3U URL video" />
         <button id="loadUrlButton">Load URL video</button>
     </div>
 
     <div>
-        <input type="text" id="remoteUrlInput" placeholder="Enter remote M3U URL list" />
-        <button id="loadRemoteUrlButton">Load Remote URL list</button>
+        <input type="text" id="remoteUrlInput" placeholder="Enter M3U URL list" />
+        <button id="loadRemoteUrlButton">Load URL list</button>
     </div>
 
     <script>
@@ -236,10 +236,10 @@
         const videoPlayer = videojs('player');
         videoPlayer.ready(function() {
             this.on('pause', function() {
-                alert('Paused.');
+                 // alert('Paused.');
             });
             this.on('play', function() {
-                // alert('Il video è stato messo in play.');
+                // alert('Play.');
             });
         });
     </script>
