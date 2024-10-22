@@ -62,14 +62,32 @@
             width: 500px;
             color: white;
         }
+        #searchInput { 
+            margin: 5px;
+            padding: 5px;
+            width: 500px;
+            color: white;
+        }
         .hidden {
             display: none;
+        }
+        .button {
+            margin-left: 5px;
+            padding: 5px 10px;
+            background-color: black;
+            color: white;
+            border: none;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-    <input type="text" id="searchInput" placeholder="Search..." style="margin: 5px;"/>
+    <div style="display: flex; align-items: center;">
+        <input type="text" id="searchInput" placeholder="Search..." style="margin: 5px;"/>
+        <button id="searchButton" class="button">Search</button>
+        <button id="resetButton" class="button">Reset</button>
+    </div>
     
     <select id="channelSelect">
         <option value="">Select a channel</option>
@@ -83,7 +101,7 @@
                data-setup="{}">
             <source id="videoSource" type="application/x-mpegURL" src=""/>
         </video>
-        <button id="muteButton">Turn on Audio</button> <!-- Spostato qui -->
+        <button id="muteButton">Turn on Audio</button>
     </div>
 	
 	<div>
@@ -176,13 +194,23 @@
             suggestionDiv.textContent = count === 0 ? 'No channels found.' : `${count} trovato/i`;
         }
 
+        document.getElementById('searchButton').addEventListener('click', function() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const filteredChannels = channels.filter(channel => 
+                channel.name.toLowerCase().includes(searchTerm)
+            );
+            populateChannelSelect(filteredChannels);
+        });
+
+        document.getElementById('resetButton').addEventListener('click', function() {
+            document.getElementById('searchInput').value = '';
+            populateChannelSelect(channels); // Ripristina tutti i canali
+        });
+
         document.getElementById('searchInput').addEventListener('keydown', function(event) {
             if (event.key === 'Enter') {
-                const searchTerm = this.value.toLowerCase();
-                const filteredChannels = channels.filter(channel => 
-                    channel.name.toLowerCase().includes(searchTerm)
-                );
-                populateChannelSelect(filteredChannels);
+                event.preventDefault(); // Evita l'invio del modulo
+                document.getElementById('searchButton').click(); // Simula il click sul bottone di ricerca
             }
         });
 
