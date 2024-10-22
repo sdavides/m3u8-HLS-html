@@ -1,9 +1,10 @@
-# m3u8-HLS-html
-load m3u video on html 
+# m3u8-HLS-html #
 
-from local file, url list, remote file
+*m3u video on html*
 
-or single page
+* from local file, url list, remote file 
+
+* or single page
 
 ![immagine](https://github.com/user-attachments/assets/116d64da-693f-4090-876f-b9b22204f0cc)
 
@@ -16,9 +17,13 @@ or single page
    * index.html
    * test.html
 * Open index.html
+  
    ( note: local file.m3u only on web server )
+
+  
 * Test
-   * Setting m3u url inside "test.html"
+   * setting m3u url inside "test.html"
+     * single page
    
 
 ## TIPS ##
