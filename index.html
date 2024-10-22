@@ -45,6 +45,10 @@
             border: none;
             padding: 5px 10px;
             cursor: pointer;
+            position: absolute;
+            bottom: 50px; /* Spostato verso l'alto */
+            left: 50%; /* Centrato orizzontalmente */
+            transform: translateX(-50%); /* Centra il bottone */
         }
         #urlInput, #remoteUrlInput {
             margin: 5px;
@@ -79,9 +83,8 @@
                data-setup="{}">
             <source id="videoSource" type="application/x-mpegURL" src=""/>
         </video>
+        <button id="muteButton">Turn on Audio</button> <!-- Spostato qui -->
     </div>
-    
-    <button id="muteButton">Turn on Audio</button>
 	
 	<div>
         <input type="file" id="fileInput" />
@@ -103,8 +106,7 @@
         let isMuted = true;
         let controlTimer;
 
-        // Load the M3U file from the server
-        fetch('./file.m3u') // Replace with your server path (only web server)
+        fetch('./file.m3u')
             .then(response => response.text())
             .then(data => {
                 parseM3U(data);
@@ -199,7 +201,6 @@
             this.textContent = isMuted ? 'Turn on Audio' : 'Turn off Audio';
         });
 
-        // Load video directly from URL
         document.getElementById('loadUrlButton').addEventListener('click', function() {
             const url = document.getElementById('urlInput').value;
             if (url) {
@@ -207,7 +208,6 @@
             }
         });
 
-        // Load M3U from file
         document.getElementById('loadFileButton').addEventListener('click', function() {
             const fileInput = document.getElementById('fileInput');
             const file = fileInput.files[0];
@@ -220,7 +220,6 @@
             }
         });
 
-        // Load M3U from remote URL
         document.getElementById('loadRemoteUrlButton').addEventListener('click', function() {
             const url = document.getElementById('remoteUrlInput').value;
             if (url) {
@@ -233,22 +232,20 @@
             }
         });
 
-        // Control visibility of video controls
         const videoPlayer = videojs('player');
 
         videoPlayer.on('mousemove', () => {
-            videoPlayer.controls(true); // Show controls
+            videoPlayer.controls(true);
             resetControlTimer();
         });
 
         function resetControlTimer() {
             clearTimeout(controlTimer);
             controlTimer = setTimeout(() => {
-                videoPlayer.controls(false); // Hide controls after 3 seconds
-            }, 3000); // Time in milliseconds
+                videoPlayer.controls(false);
+            }, 3000);
         }
 
-        // Show controls on video start
         videoPlayer.ready(() => {
             videoPlayer.controls(true);
             resetControlTimer();
