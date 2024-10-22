@@ -12,7 +12,7 @@ or single page
 ## HTML video x-mpegURL ##
 * Download video-js.css video.js index.html test.html
 * Open index.html
-   ( note: local file only on web server )
+   ( note: local file.m3u only on web server )
 * Test
    * Setting m3u url inside "test.html"
    
