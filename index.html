@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <link href="./video-js.css" rel="stylesheet"/>
     <script src="./video.js"></script>
-    <style>
+	    <style>
         body {
             margin: 0;
             background-color: #333;
@@ -80,6 +80,7 @@
             cursor: pointer;
         }
     </style>
+
 </head>
 <body>
 
@@ -96,15 +97,15 @@
     <div id="videoContainer">
         <video id="player" 
                class="video-js" 
-               autoplay muted preload="auto"
+               controls autoplay muted preload="auto"
                poster="./play.png"
                data-setup="{}">
-            <source id="videoSource" type="application/x-mpegURL" src=""/>
+            <source id="videoSource" type="application/x-mpegURL" src="https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8"/>
         </video>
         <button id="muteButton">Turn on Audio</button>
     </div>
 	
-	<div>
+    <div>
         <input type="file" id="fileInput" />
         <button id="loadFileButton">Load File</button>
     </div>
@@ -260,27 +261,8 @@
             }
         });
 
-        const videoPlayer = videojs('player');
 
-        videoPlayer.on('mousemove', () => {
-            videoPlayer.controls(true);
-            resetControlTimer();
-        });
 
-        function resetControlTimer() {
-            clearTimeout(controlTimer);
-            controlTimer = setTimeout(() => {
-                videoPlayer.controls(false);
-            }, 3000);
-        }
-
-        videoPlayer.ready(() => {
-            videoPlayer.controls(true);
-            resetControlTimer();
-        });
-
-        videoPlayer.on('play', resetControlTimer);
-        videoPlayer.on('pause', resetControlTimer);
     </script>
     
 </body>
