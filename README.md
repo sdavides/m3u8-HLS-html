@@ -10,7 +10,11 @@ or single page
 
 
 ## HTML video x-mpegURL ##
-* Download video-js.css video.js index.html test.html
+* Download
+   * video-js.css
+   * video.js
+   * index.html
+   * test.html
 * Open index.html
    ( note: local file.m3u only on web server )
 * Test
