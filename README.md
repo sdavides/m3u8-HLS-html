@@ -26,8 +26,8 @@
 
   
 * Test
-   * setting m3u url inside "test.html"
-     * single page
+   * Setting m3u url inside "test.html"
+     * Open test.html
    
 
 ## TIPS ##
