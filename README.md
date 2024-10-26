@@ -1,6 +1,10 @@
 # m3u8-HLS-html #
 
-*m3u video on html*
+  * Playlist or Video
+
+    *m3u8, mpd, mp4, mov, webm*
+    
+    *playlist m3u*
 
 * from local file, url list, remote file 
 
